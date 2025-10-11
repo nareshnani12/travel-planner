@@ -61,7 +61,8 @@ if submit_button:
         st.error("Please fill all the fields")
     else:
         with st.spinner("Generating your travel plan with pure hearts..."):
-            prompt=f"""
+            try:
+                prompt=f"""
             Create a detailed daily travel itinerary with the following information:
             starting from:{strating_point}
             Destinations to visit:{destinations}
@@ -81,15 +82,15 @@ if submit_button:
 
             Format the response in a clear,organised manner with sections for each day."""
 
-           try:
-            model = genai.GenerativeModel("gemini-1.5-pro")
-            response = model.generate_content(prompt)
-            st.write(response.text)
-            st.download_button(
-                label="Download Itinerary",
-                data=response.text,
-                file_name="travel_itinerary.txt",
-                mime="text/plain"
+           
+                model = genai.GenerativeModel("gemini-1.5-pro")
+                response = model.generate_content(prompt)
+                st.write(response.text)
+                st.download_button(
+                    label="Download Itinerary",
+                    data=response.text,
+                    file_name="travel_itinerary.txt",
+                    mime="text/plain"
     )
             except Exception as e:
                 st.error(f"Error generating itinerary: {e}")
@@ -107,6 +108,7 @@ def reset_form():
     st.session_state["preferences"] = ""
 
 st.button("Reset", on_click=reset_form)
+
 
 
 
