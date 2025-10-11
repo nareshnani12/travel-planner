@@ -4,7 +4,7 @@ import datetime
 import os
 
 # Configure your Gemini API key (secure way for Streamlit Cloud)
-genai.configure(api_key=os.getenv("AIzaSyAUJY9wFrtkdpW3vyPJ98RESc3bP2oEHsY"))
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 st.title("Nani's Planner 💕")
 
@@ -103,4 +103,5 @@ def reset_form():
     st.session_state["preferences"] = ""
 
 st.button("Reset", on_click=reset_form)
+
 
