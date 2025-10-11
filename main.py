@@ -83,7 +83,7 @@ if submit_button:
             Format the response in a clear,organised manner with sections for each day."""
 
            
-                model = genai.GenerativeModel("gemini-1.5-pro")
+                model = genai.GenerativeModel("gemini-2.5-flash")
                 response = model.generate_content(prompt)
                 st.write(response.text)
                 st.download_button(
@@ -108,6 +108,7 @@ def reset_form():
     st.session_state["preferences"] = ""
 
 st.button("Reset", on_click=reset_form)
+
 
 
 
