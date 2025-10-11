@@ -81,6 +81,7 @@ if submit_button:
 
             Format the response in a clear,organised manner with sections for each day."""
 
+           try:
             model = genai.GenerativeModel("gemini-1.5-pro")
             response = model.generate_content(prompt)
             st.write(response.text)
@@ -89,7 +90,10 @@ if submit_button:
                 data=response.text,
                 file_name="travel_itinerary.txt",
                 mime="text/plain"
-            )
+    )
+            except Exception as e:
+                st.error(f"Error generating itinerary: {e}")
+
 
 def reset_form():
     st.session_state["strating_point"] = ""
@@ -103,6 +107,7 @@ def reset_form():
     st.session_state["preferences"] = ""
 
 st.button("Reset", on_click=reset_form)
+
 
 
 
